@@ -1,0 +1,150 @@
+{
+  "generatedAt": "2026-10-09T12:21:01.389Z",
+  "mode": "sample",
+  "products": {
+    "wh1000xm6": {
+      "stores": {
+        "rakuten": {
+          "status": "sample",
+          "price": 48880,
+          "title": "WH-1000XM6（サンプル）",
+          "url": "https://search.rakuten.co.jp/search/mall/WH-1000XM6/",
+          "shop": "",
+          "shipping": ""
+        },
+        "yahoo": {
+          "status": "sample",
+          "price": 50080,
+          "title": "WH-1000XM6（サンプル）",
+          "url": "https://shopping.yahoo.co.jp/search?p=WH-1000XM6",
+          "shop": "",
+          "shipping": ""
+        },
+        "amazon": {
+          "status": "free_link",
+          "url": "https://www.amazon.co.jp/s?k=WH-1000XM6",
+          "message": "Amazon の価格は Keepa（無料）で確認できます"
+        }
+      },
+      "best": {
+        "store": "rakuten",
+        "price": 48880
+      },
+      "links": {
+        "amazon": "https://www.amazon.co.jp/s?k=WH-1000XM6",
+        "rakuten": "https://search.rakuten.co.jp/search/mall/WH-1000XM6/",
+        "yahoo": "https://shopping.yahoo.co.jp/search?p=WH-1000XM6",
+        "keepa": "https://keepa.com/#!search/5-WH-1000XM6"
+      },
+      "fetchedAt": "2026-10-09T12:21:01.389Z"
+    },
+    "wf1000xm6": {
+      "stores": {
+        "rakuten": {
+          "status": "sample",
+          "price": 32010,
+          "title": "WF-1000XM6（サンプル）",
+          "url": "https://search.rakuten.co.jp/search/mall/WF-1000XM6/",
+          "shop": "",
+          "shipping": ""
+        },
+        "yahoo": {
+          "status": "sample",
+          "price": 33210,
+          "title": "WF-1000XM6（サンプル）",
+          "url": "https://shopping.yahoo.co.jp/search?p=WF-1000XM6",
+          "shop": "",
+          "shipping": ""
+        },
+        "amazon": {
+          "status": "free_link",
+          "url": "https://www.amazon.co.jp/s?k=WF-1000XM6",
+          "message": "Amazon の価格は Keepa（無料）で確認できます"
+        }
+      },
+      "best": {
+        "store": "rakuten",
+        "price": 32010
+      },
+      "links": {
+        "amazon": "https://www.amazon.co.jp/s?k=WF-1000XM6",
+        "rakuten": "https://search.rakuten.co.jp/search/mall/WF-1000XM6/",
+        "yahoo": "https://shopping.yahoo.co.jp/search?p=WF-1000XM6",
+        "keepa": "https://keepa.com/#!search/5-WF-1000XM6"
+      },
+      "fetchedAt": "2026-10-09T12:21:01.389Z"
+    },
+    "qcultra-hp2": {
+      "stores": {
+        "rakuten": {
+          "status": "sample",
+          "price": 47040,
+          "title": "QuietComfort Ultra Headphones 第2世代（サンプル）",
+          "url": "https://search.rakuten.co.jp/search/mall/QuietComfort%20Ultra%20Headphones%20%E7%AC%AC2%E4%B8%96%E4%BB%A3/",
+          "shop": "",
+          "shipping": ""
+        },
+        "yahoo": {
+          "status": "sample",
+          "price": 48240,
+          "title": "QuietComfort Ultra Headphones 第2世代（サンプル）",
+          "url": "https://shopping.yahoo.co.jp/search?p=QuietComfort%20Ultra%20Headphones%20%E7%AC%AC2%E4%B8%96%E4%BB%A3",
+          "shop": "",
+          "shipping": ""
+        },
+        "amazon": {
+          "status": "free_link",
+          "url": "https://www.amazon.co.jp/s?k=QuietComfort%20Ultra%20Headphones%20%E7%AC%AC2%E4%B8%96%E4%BB%A3",
+          "message": "Amazon の価格は Keepa（無料）で確認できます"
+        }
+      },
+      "best": {
+        "store": "rakuten",
+        "price": 47040
+      },
+      "links": {
+        "amazon": "https://www.amazon.co.jp/s?k=QuietComfort%20Ultra%20Headphones%20%E7%AC%AC2%E4%B8%96%E4%BB%A3",
+        "rakuten": "https://search.rakuten.co.jp/search/mall/QuietComfort%20Ultra%20Headphones%20%E7%AC%AC2%E4%B8%96%E4%BB%A3/",
+        "yahoo": "https://shopping.yahoo.co.jp/search?p=QuietComfort%20Ultra%20Headphones%20%E7%AC%AC2%E4%B8%96%E4%BB%A3",
+        "keepa": "https://keepa.com/#!search/5-QuietComfort%20Ultra%20Headphones%20%E7%AC%AC2%E4%B8%96%E4%BB%A3"
+      },
+      "fetchedAt": "2026-10-09T12:21:01.389Z"
+    },
+    "qcultra-eb2": {
+      "stores": {
+        "rakuten": {
+          "status": "sample",
+          "price": 28560,
+          "title": "QuietComfort Ultra Earbuds 第2世代（サンプル）",
+          "url": "https://search.rakuten.co.jp/search/mall/QuietComfort%20Ultra%20Earbuds%20%E7%AC%AC2%E4%B8%96%E4%BB%A3/",
+          "shop": "",
+          "shipping": ""
+        },
+        "yahoo": {
+          "status": "sample",
+          "price": 29760,
+          "title": "QuietComfort Ultra Earbuds 第2世代（サンプル）",
+          "url": "https://shopping.yahoo.co.jp/search?p=QuietComfort%20Ultra%20Earbuds%20%E7%AC%AC2%E4%B8%96%E4%BB%A3",
+          "shop": "",
+          "shipping": ""
+        },
+        "amazon": {
+          "status": "free_link",
+          "url": "https://www.amazon.co.jp/s?k=QuietComfort%20Ultra%20Earbuds%20%E7%AC%AC2%E4%B8%96%E4%BB%A3",
+          "message": "Amazon の価格は Keepa（無料）で確認できます"
+        }
+      },
+      "best": {
+        "store": "rakuten",
+        "price": 28560
+      },
+      "links": {
+        "amazon": "https://www.amazon.co.jp/s?k=QuietComfort%20Ultra%20Earbuds%20%E7%AC%AC2%E4%B8%96%E4%BB%A3",
+        "rakuten": "https://search.rakuten.co.jp/search/mall/QuietComfort%20Ultra%20Earbuds%20%E7%AC%AC2%E4%B8%96%E4%BB%A3/",
+        "yahoo": "https://shopping.yahoo.co.jp/search?p=QuietComfort%20Ultra%20Earbuds%20%E7%AC%AC2%E4%B8%96%E4%BB%A3",
+        "keepa": "https://keepa.com/#!search/5-QuietComfort%20Ultra%20Earbuds%20%E7%AC%AC2%E4%B8%96%E4%BB%A3"
+      },
+      "fetchedAt": "2026-10-09T12:21:01.389Z"
+    }
+  }
+}

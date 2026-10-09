@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Price Watch シンプルshiro_AI</title>
+  <meta name="description" content="Sony・Bose の価格を楽天・Yahoo!で見張る、自分用の価格監視アプリ">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="title">
+      <img src="icons/icon-192.png" alt="" width="28" height="28">
+      <span>Price Watch <b>シンプルshiro_AI</b></span>
+    </div>
+    <button id="refresh" class="icon-btn" type="button" aria-label="最新の価格を読み込む">↻</button>
+  </header>
+
+  <div id="sale-banner" class="sale-banner" hidden></div>
+  <div id="notice" class="notice" hidden></div>
+
+  <main>
+    <section id="view-products" class="view" aria-label="商品">
+      <div id="products"></div>
+    </section>
+
+    <section id="view-sales" class="view" aria-label="セール" hidden>
+      <h2>セール予定</h2>
+      <div id="sales"></div>
+      <p class="hint">セール情報は <code>data/sales.json</code> で追加・変更できます。</p>
+    </section>
+
+    <section id="view-settings" class="view" aria-label="設定" hidden>
+      <h2>目標価格</h2>
+      <p class="hint">この端末に保存されます。スマホとPCでは別々に設定してください。</p>
+      <form id="targets-form"></form>
+
+      <h2>通知</h2>
+      <div class="panel">
+        <p id="notify-status">確認中…</p>
+        <div class="row-btns">
+          <button id="notify-allow" type="button" class="btn">通知を許可する</button>
+          <button id="notify-test" type="button" class="btn ghost">テスト通知</button>
+        </div>
+        <p class="hint">アプリを開いている間、10分ごとに最新価格を確認し、目標価格以下になったら通知します。アプリを閉じていても通知を受けたい場合は README の「ntfy」の手順をご覧ください。</p>
+      </div>
+
+      <h2>動作チェック</h2>
+      <div class="panel">
+        <button id="run-check" type="button" class="btn">チェックを実行</button>
+        <ul id="check-result" class="checks"></ul>
+      </div>
+
+      <h2>このアプリについて</h2>
+      <div class="panel small">
+        <p id="data-info">—</p>
+        <p>価格は楽天市場・Yahoo!ショッピングの公式APIで取得しています。Amazon は無料の Keepa で確認できます（Keepa API キーを登録した場合のみ自動取得）。表示価格は取得時点のもので、ポイント・クーポンは含みません。購入前に販売ページで必ずご確認ください。</p>
+        <p class="credit">
+          <a href="https://keepa.com/" target="_blank" rel="noopener">Amazon価格：Keepa</a><br>
+          <a href="https://webservice.rakuten.co.jp/" target="_blank" rel="noopener">Supported by Rakuten Developers</a><br>
+          <a href="https://developer.yahoo.co.jp/sitemap/" target="_blank" rel="noopener">Web Services by Yahoo! JAPAN</a>
+        </p>
+        <p>バージョン 1.0.0（第1段階）</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs" aria-label="画面切り替え">
+    <button type="button" data-view="products" class="active"><span aria-hidden="true">◎</span>商品</button>
+    <button type="button" data-view="sales"><span aria-hidden="true">◷</span>セール</button>
+    <button type="button" data-view="settings"><span aria-hidden="true">⚙</span>設定</button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

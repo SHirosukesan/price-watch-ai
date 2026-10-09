@@ -1,0 +1,58 @@
+# 価格を取得して、アプリ（GitHub Pages）を更新する自動処理
+# ・1時間ごと（GitHub側の混雑で数分〜十数分遅れることがあります）
+# ・ファイルを変更して保存（push）したとき
+# ・Actions 画面の「Run workflow」ボタンを押したとき
+name: 価格を取得してアプリを更新
+
+on:
+  schedule:
+    - cron: "7 * * * *"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: ファイルを取り出す
+        uses: actions/checkout@v4
+
+      - name: Node.js を用意する
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 価格を取得する
+        env:
+          RAKUTEN_APP_ID: ${{ secrets.RAKUTEN_APP_ID }}
+          RAKUTEN_ACCESS_KEY: ${{ secrets.RAKUTEN_ACCESS_KEY }}
+          YAHOO_APP_ID: ${{ secrets.YAHOO_APP_ID }}
+          KEEPA_API_KEY: ${{ secrets.KEEPA_API_KEY }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: node scripts/fetch-prices.mjs
+
+      - name: 公開用ファイルをまとめる
+        run: |
+          mkdir _site
+          cp -r index.html style.css app.js sw.js manifest.webmanifest icons data _site/
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: 公開する
+        id: deploy
+        uses: actions/deploy-pages@v4

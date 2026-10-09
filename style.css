@@ -1,0 +1,169 @@
+/* Price Watch シンプルshiro_AI — 見た目の設定
+   色を変えたいときは :root の値だけ変えればOKです。 */
+:root {
+  --bg: #f6f6f4;
+  --card: #ffffff;
+  --text: #1c1d1f;
+  --sub: #6b6e73;
+  --line: #e4e4e0;
+  --accent: #2563eb;      /* ボタン・リンク */
+  --good: #15803d;        /* 目標達成・実価格 */
+  --good-bg: #e8f5ec;
+  --warn: #b45309;        /* 注意 */
+  --warn-bg: #fdf3e3;
+  --bad: #b91c1c;         /* エラー */
+  --bad-bg: #fdecec;
+  --sample: #7a7d82;      /* サンプル価格 */
+  --sample-bg: #ededeb;
+  --radius: 14px;
+  --font: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111214; --card: #1b1c1f; --text: #ececec; --sub: #9a9ca1; --line: #2c2d31;
+    --accent: #6ea0ff; --good: #4ade80; --good-bg: #16261b; --warn: #fbbf24; --warn-bg: #2a2214;
+    --bad: #f87171; --bad-bg: #2b1717; --sample: #a0a2a6; --sample-bg: #26272a;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); }
+body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); -webkit-text-size-adjust: 100%; }
+a { color: var(--accent); }
+h2 { font-size: 15px; margin: 24px 0 8px; }
+code { font-size: 13px; background: var(--sample-bg); padding: 1px 5px; border-radius: 5px; }
+
+.top {
+  position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between;
+  padding: calc(10px + env(safe-area-inset-top)) 16px 10px; background: var(--bg); border-bottom: 1px solid var(--line);
+}
+.title { display: flex; align-items: center; gap: 8px; font-size: 15px; }
+.title img { border-radius: 7px; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: var(--card);
+  color: var(--text); font-size: 20px; cursor: pointer;
+}
+.icon-btn.spin { animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+main { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+.sale-banner, .notice {
+  max-width: 720px; margin: 12px auto 0; padding: 10px 14px; border-radius: 10px; font-size: 14px; line-height: 1.5;
+}
+.sale-banner { background: var(--card); border: 1px solid var(--line); }
+.sale-banner b { color: var(--bad); }
+.sale-banner.live { border-color: var(--bad); }
+.notice { background: var(--warn-bg); color: var(--warn); }
+@media (max-width: 752px) { .sale-banner, .notice { margin-left: 16px; margin-right: 16px; } }
+
+/* 商品カード */
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px; margin: 12px 0;
+}
+.card.hit { border: 2px solid var(--good); }
+.meta { font-size: 12px; color: var(--sub); }
+.name { font-size: 16px; font-weight: 700; margin: 2px 0 10px; line-height: 1.35; }
+.price-line { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.price { font-size: 30px; font-weight: 700; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+.price.sample { color: var(--sample); }
+.badge { font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 99px; white-space: nowrap; }
+.badge.real { background: var(--good-bg); color: var(--good); }
+.badge.sample { background: var(--sample-bg); color: var(--sample); border: 1px dashed var(--sample); }
+.badge.err { background: var(--bad-bg); color: var(--bad); }
+.target { margin-top: 6px; font-size: 14px; }
+.target.hit { color: var(--good); font-weight: 700; }
+.diff { font-size: 13px; color: var(--sub); margin-top: 2px; }
+.diff .down { color: var(--good); font-weight: 700; }
+.diff .up { color: var(--bad); }
+
+.stores { list-style: none; padding: 0; margin: 12px 0 0; border-top: 1px solid var(--line); }
+.stores li {
+  display: grid; grid-template-columns: 64px 1fr auto; gap: 8px; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px;
+}
+.stores .sname { font-weight: 700; }
+.stores .sinfo { min-width: 0; }
+.stores .sinfo small { display: block; color: var(--sub); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.stores .sprice { font-variant-numeric: tabular-nums; font-weight: 700; }
+.stores .sprice.sample { color: var(--sample); }
+.stores .msg { color: var(--sub); font-size: 12px; }
+.stores .msg.err { color: var(--bad); }
+.go {
+  display: inline-block; padding: 8px 12px; border-radius: 8px; background: var(--accent); color: #fff;
+  text-decoration: none; font-size: 13px; font-weight: 700; white-space: nowrap;
+}
+.go.ghost { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+.fetched { font-size: 12px; color: var(--sub); margin-top: 10px; }
+.fetched.stale { color: var(--warn); }
+
+/* 商品画像 */
+.head { display: flex; gap: 14px; align-items: center; }
+.head-text { min-width: 0; flex: 1; }
+.head .name { margin-bottom: 6px; }
+.thumb {
+  width: 88px; height: 88px; flex: none; border-radius: 10px; object-fit: contain;
+  background: #fff; border: 1px solid var(--line);
+}
+.thumb.ph {
+  display: flex; align-items: center; justify-content: center; background: var(--sample-bg);
+  color: var(--sample); font-size: 13px; font-weight: 700;
+}
+@media (max-width: 380px) { .thumb { width: 68px; height: 68px; } .price { font-size: 26px; } }
+
+.stores .acts { display: flex; gap: 6px; justify-content: flex-end; }
+
+/* セール */
+.sale { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin: 10px 0; }
+.sale.live { border: 2px solid var(--bad); }
+.sale.ended { opacity: .55; }
+.sale .when { font-size: 14px; margin: 4px 0; }
+.sale .count { font-size: 20px; font-weight: 700; margin: 6px 0; font-variant-numeric: tabular-nums; }
+.sale.live .count { color: var(--bad); }
+.sale p { font-size: 13px; color: var(--sub); margin: 6px 0 0; }
+
+/* 設定 */
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.panel.small { font-size: 13px; line-height: 1.6; color: var(--sub); }
+.panel p { margin: 0 0 10px; }
+.hint { font-size: 13px; color: var(--sub); line-height: 1.6; margin: 4px 0 10px; }
+#targets-form { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 16px 14px; }
+.t-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.t-row label { font-size: 14px; line-height: 1.35; }
+.t-row label small { display: block; color: var(--sub); font-size: 12px; }
+.t-input { display: flex; align-items: center; gap: 4px; }
+.t-input input {
+  width: 110px; font-size: 17px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--bg); color: var(--text); text-align: right; font-variant-numeric: tabular-nums;
+}
+.row-btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.btn {
+  padding: 11px 16px; border-radius: 10px; border: 0; background: var(--accent); color: #fff;
+  font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit;
+}
+.btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+.btn:disabled { opacity: .5; }
+.saved { color: var(--good); font-size: 14px; margin-left: 4px; }
+.checks { list-style: none; padding: 0; margin: 12px 0 0; }
+.checks li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 14px; line-height: 1.5; }
+.checks li small { display: block; color: var(--sub); font-size: 12px; }
+.credit a { color: var(--sub); }
+
+/* 下のタブ */
+.tabs {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; justify-content: center;
+  background: var(--card); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom);
+}
+.tabs button {
+  flex: 1; max-width: 240px; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 9px 0 10px; border: 0; background: none; color: var(--sub); font-size: 12px; font-family: inherit; cursor: pointer;
+}
+.tabs button span { font-size: 19px; line-height: 1; }
+.tabs button.active { color: var(--accent); font-weight: 700; }
+
+@media (min-width: 900px) {
+  #products { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+  main { max-width: 980px; }
+  .sale-banner, .notice { max-width: 980px; }
+}

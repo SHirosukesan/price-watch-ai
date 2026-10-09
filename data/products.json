@@ -1,0 +1,50 @@
+{
+  "_説明": "監視する商品の一覧です。target は初期の目標価格（アプリの設定画面で端末ごとに変更できます）。queries は検索ワード、mustAll は商品名に必ず含む文字、mustAny はどれか1つを含む文字、minPrice より安いものは付属品とみなして除外します。",
+  "products": [
+    {
+      "id": "wh1000xm6",
+      "brand": "Sony",
+      "name": "WH-1000XM6",
+      "kind": "ヘッドホン",
+      "target": 47000,
+      "queries": ["WH-1000XM6"],
+      "mustAll": ["WH1000XM6"],
+      "mustAny": [],
+      "minPrice": 30000
+    },
+    {
+      "id": "wf1000xm6",
+      "brand": "Sony",
+      "name": "WF-1000XM6",
+      "kind": "ワイヤレスイヤホン",
+      "target": 33000,
+      "queries": ["WF-1000XM6"],
+      "mustAll": ["WF1000XM6"],
+      "mustAny": [],
+      "minPrice": 20000
+    },
+    {
+      "id": "qcultra-hp2",
+      "brand": "Bose",
+      "name": "QuietComfort Ultra Headphones 第2世代",
+      "kind": "ヘッドホン",
+      "target": 42000,
+      "queries": ["QuietComfort Ultra Headphones 第2世代", "QuietComfort Ultra Headphones 2nd"],
+      "mustAll": ["QUIETCOMFORTULTRA", "HEADPHONE"],
+      "mustAny": ["第2世代", "第二世代", "2NDGEN", "GEN2", "(2ND", "2NDGENERATION"],
+      "minPrice": 30000
+    },
+    {
+      "id": "qcultra-eb2",
+      "brand": "Bose",
+      "name": "QuietComfort Ultra Earbuds 第2世代",
+      "kind": "ワイヤレスイヤホン",
+      "target": 28000,
+      "queries": ["QuietComfort Ultra Earbuds 第2世代", "QuietComfort Ultra Earbuds 2nd"],
+      "mustAll": ["QUIETCOMFORTULTRA", "EARBUDS"],
+      "mustAny": ["第2世代", "第二世代", "2NDGEN", "GEN2", "(2ND", "2NDGENERATION"],
+      "minPrice": 18000
+    }
+  ],
+  "excludeWords": ["中古", "ケース", "カバー", "イヤーパッド", "イヤーピース", "イヤーチップ", "フィルム", "保護", "交換用", "互換", "片耳", "左耳", "右耳", "レンタル", "訳あり", "展示品", "整備品", "再生品", "ジャンク", "スタンド", "ケーブル"]
+}

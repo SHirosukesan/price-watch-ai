@@ -1,0 +1,17 @@
+# キーやパスワードを書いたファイルは GitHub に送らない
+.env
+.env.*
+*.key
+*.pem
+secrets.*
+*secret*
+*password*
+
+# パソコンが勝手に作るファイル
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 公開用に一時的に作るフォルダ
+_site/
+node_modules/
