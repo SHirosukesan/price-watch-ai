@@ -100,7 +100,10 @@ async function searchRakuten(product, excludeWords) {
       if (r.status === 404) { seen.push(`「${q}」404:${r.body?.error_description || ""}`); continue; }
       return { status: "error", message: errorMessage("rakuten", r.status, r.body) };
     }
-    const items = r.body?.items || [];
+    // 楽天の返事は「Items」「items」のどちらの書き方でも読めるようにする（形式の違いを吸収）
+    const raw = r.body?.Items || r.body?.items || [];
+    const items = raw.map((x) => x?.Item || x?.item || x);
+    if (!raw.length) seen.push(`返事の項目:${Object.keys(r.body || {}).join(",")}`);
     seen.push(`「${q}」${items.length}件 例:${items.slice(0, 2).map((i) => `${String(i.itemName).slice(0, 40)}(${i.itemPrice})`).join(" / ")}`);
     for (const it of items) {
       if (isMatch(product, it.itemName, it.itemPrice, excludeWords)) {
