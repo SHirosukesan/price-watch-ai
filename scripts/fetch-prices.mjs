@@ -296,7 +296,7 @@ export async function main() {
     }
     // GitHub の実行画面に結果のメモを出す（キーは含まない）
     if (env.GITHUB_ACTIONS) {
-      const fmt = (st) => st.status === "ok" ? `${st.price}円` : (st.message || st.status);
+      const fmt = (st) => st.status === "ok" ? `${st.price}円「${String(st.title).slice(0, 60)}」${st.shop}` : (st.message || st.status);
       const level = [stores.rakuten, stores.yahoo].some((st) => st.status === "error") ? "warning" : "notice";
       console.log(`::${level} title=${p.name}::楽天=${fmt(stores.rakuten)} / Yahoo!=${fmt(stores.yahoo)}`);
     }
