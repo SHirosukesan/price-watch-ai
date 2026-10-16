@@ -23,7 +23,7 @@ Sony・Bose のヘッドホン／イヤホン 4機種の価格を、Amazon・楽
 ## しくみ（ざっくり）
 
 ```
-GitHub Actions（1時間ごとに自動実行）
+GitHub Actions（30分ごとに自動実行）
    │ Keepa API（Amazon）・楽天API・Yahoo!APIで価格と画像を取得 → data/prices.json を作る
    ▼
 GitHub Pages（無料の公開場所）
@@ -52,10 +52,10 @@ Keepa API は最安プランで月額 約49ユーロ（約8,000〜9,000円。正
 細かい操作は Claude が1ステップずつ案内します。ここは全体像です。
 
 1. GitHub のアカウントを作る
-2. リポジトリ（ファイル置き場）`SHirosukesan/price-watch-ai` を **Private（非公開）** で作る（作成済み）
+2. リポジトリ（ファイル置き場）`SHirosukesan/price-watch-ai` を **Public（公開）** にする（キーやパスワードはコードに含まれないので公開して大丈夫です）
 3. このフォルダの中身をすべてアップロードする（`.github` フォルダも含む）
-4. アプリの公開先を決める（※無料プランの非公開リポジトリでは GitHub Pages が使えないため。決まり次第ここを更新します）
-5. Actions タブで「価格を取得してアプリを更新」を実行 → アプリのURLが開ければ成功（この時点ではサンプル価格）
+4. Settings → Pages → Source を **GitHub Actions** にする
+5. Actions タブで「価格を取得してアプリを更新」を実行 → アプリのURL `https://shirosukesan.github.io/price-watch-ai/` が開ければ成功（この時点ではサンプル価格）
 6. 楽天ウェブサービスでアプリ登録し、**アプリID** と **アクセスキー** を取得（WebサイトURL にはアプリのURLを登録）
 7. Yahoo!デベロッパーネットワークで **Client ID** を取得
 8. GitHub の Settings → Secrets and variables → Actions に、次の名前で登録
@@ -105,7 +105,7 @@ Keepa API は最安プランで月額 約49ユーロ（約8,000〜9,000円。正
 | 症状 | よくある原因と対処 |
 |---|---|
 | ずっと「サンプル」のまま | Secrets の名前が違う／登録後に Actions を実行していない |
-| 楽天：キーが違うか…URLと一致しません | 楽天のアプリ設定の「WebサイトURL」を `https://（ユーザー名）.github.io/` にする |
+| 楽天：キーが違うか…URLと一致しません | 楽天のアプリ設定の「WebサイトURL」を `https://shirosukesan.github.io/price-watch-ai/` にする |
 | 取得が2時間以上止まっている | Actions タブで赤い×の実行を開き、エラーを Claude に貼り付けて相談 |
 | 価格が付属品やケースの値段になる | `data/products.json` の `minPrice` を上げる／`excludeWords` に言葉を足す |
 | 通知が来ない | 設定 → 通知を許可。Android は「ホーム画面に追加」した方が安定します |
@@ -123,7 +123,7 @@ Keepa API は最安プランで月額 約49ユーロ（約8,000〜9,000円。正
 | `data/sales.json` | セール予定（追加・変更はここ） |
 | `data/prices.json` | 取得した価格（自動で作られる。手で編集しない） |
 | `scripts/fetch-prices.mjs` | Amazon(Keepa)・楽天・Yahoo! から価格と画像を取る処理 |
-| `.github/workflows/update-prices.yml` | 1時間ごとの自動実行と公開の設定 |
+| `.github/workflows/update-prices.yml` | 30分ごとの自動実行と公開の設定 |
 
 ## 注意
 

@@ -1,16 +1,14 @@
 # 価格を取得して、アプリ（GitHub Pages）を更新する自動処理
-# ・1時間ごと（GitHub側の混雑で数分〜十数分遅れることがあります）
+# ・30分ごと（GitHub側の混雑で数分〜十数分遅れることがあります）
 # ・ファイルを変更して保存（push）したとき
 # ・Actions 画面の「Run workflow」ボタンを押したとき
 name: 価格を取得してアプリを更新
 
-# ※アプリの公開先が決まるまでは手動実行のみ（失敗の通知が毎時届かないように）。
-#   公開先が決まったら、下の schedule と push を有効に戻す。
 on:
-  # schedule:
-  #   - cron: "7 * * * *"
-  # push:
-  #   branches: [main]
+  schedule:
+    - cron: "7,37 * * * *"
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

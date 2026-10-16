@@ -1,5 +1,5 @@
 // Price Watch シンプルshiro_AI — 価格取得スクリプト
-// GitHub Actions から1時間ごとに実行され、data/prices.json を作ります。
+// GitHub Actions から30分ごとに実行され、data/prices.json を作ります。
 // 追加ライブラリは不要です（Node.js 20 以上の標準機能だけで動きます）。
 //
 // 使うキー（GitHub の Secrets に保存。コードには書かない）:

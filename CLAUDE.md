@@ -18,7 +18,7 @@
 3. **実価格とサンプル価格を必ず区別**して表示する（`prices.json` の `mode` と各店舗の `status` を使う）。
 4. **スクレイピングをしない**。楽天市場 商品検索API、Yahoo!ショッピング 商品検索API v3、Amazon は既定では無料方式（Keepa の価格推移ページと Amazon へのリンク、値下がりは Keepa の無料メール通知）。有料の Keepa API キーがある場合のみ自動取得。PA-API は廃止、Creators API は売上条件で使えない。手入力方式は利用者が不要と判断したので作らない。
 5. **APIキー・パスワードをコードに書かない**。GitHub Secrets（`RAKUTEN_APP_ID` / `RAKUTEN_ACCESS_KEY` / `YAHOO_APP_ID` / `KEEPA_API_KEY` / `NTFY_TOPIC`）から環境変数で読む。
-6. 無料で運用する。リポジトリは `SHirosukesan/price-watch-ai`（**非公開**）。無料プランの非公開リポジトリでは GitHub Pages が使えないので、公開先は利用者と相談して決める（未決定）。
+6. 無料で運用する。リポジトリは `SHirosukesan/price-watch-ai`。無料で GitHub Pages を使うため、利用者の判断で**公開リポジトリ**にした（2026-10-16）。だからこそ、キー・パスワード・個人情報は絶対にコミットしない。アプリURL：`https://shirosukesan.github.io/price-watch-ai/`
 7. AI 価格予測・課金・複雑なポイント計算は入れない。
 
 ## 構成
@@ -28,7 +28,7 @@
 - `data/products.json` … 商品定義。`queries`（検索語）、`mustAll` / `mustAny`（商品名の必須文字、表記ゆれは `normalize()` で吸収）、`minPrice`（付属品除外）。
 - `data/sales.json` … セール予定（日本時間 `+09:00`）。
 - `data/prices.json` … `scripts/fetch-prices.mjs` が生成。リポジトリ内のものはサンプル。公開版は Actions が毎回作り直す（コミットはしない）。
-- `.github/workflows/update-prices.yml` … 1時間ごと＋push時＋手動で、価格取得 → Pages へ公開。
+- `.github/workflows/update-prices.yml` … 30分ごと＋push時＋手動で、価格取得 → Pages へ公開。
 
 ## API の要点（2026年10月時点で確認）
 
