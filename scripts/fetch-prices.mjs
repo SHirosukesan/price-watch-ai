@@ -135,7 +135,7 @@ async function searchYahoo(product, excludeWords) {
     if (!r.ok) {
       if (env.GITHUB_ACTIONS) {
         const detail = JSON.stringify(r.body ?? {}).slice(0, 300);
-        console.log(`::warning title=Yahoo!の診断::コード${r.status} 返事:${detail} ／ Client IDの文字数:${env.YAHOO_APP_ID.length}`);
+        console.log(`::warning title=Yahoo!の診断::コード${r.status} 返事:${detail} ／ Client IDの文字数:${env.YAHOO_APP_ID.length} 先頭がdj00:${env.YAHOO_APP_ID.startsWith("dj00")} 英数字と-_だけ:${/^[A-Za-z0-9_-]+$/.test(env.YAHOO_APP_ID)} 空白を含む:${/\s/.test(env.YAHOO_APP_ID)}`);
       }
       return { status: "error", message: errorMessage("yahoo", r.status, r.body) };
     }
