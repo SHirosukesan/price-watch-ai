@@ -18,7 +18,8 @@ const ROOT = new URL("../", import.meta.url);
 const PRODUCTS_FILE = new URL("data/products.json", ROOT);
 const OUTPUT_FILE = new URL("data/prices.json", ROOT);
 
-const env = process.env;
+// キーの前後に空白や改行が紛れ込んでも動くように取り除く
+const env = Object.fromEntries(Object.entries(process.env).map(([k, v]) => [k, typeof v === "string" ? v.trim() : v]));
 const RAKUTEN_URL = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701";
 const YAHOO_URL = "https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch";
 const KEEPA_URL = "https://api.keepa.com";
@@ -131,7 +132,13 @@ async function searchYahoo(product, excludeWords) {
     });
     const r = await getJson(`${YAHOO_URL}?${params}`);
     await sleep(1200);
-    if (!r.ok) return { status: "error", message: errorMessage("yahoo", r.status, r.body) };
+    if (!r.ok) {
+      if (env.GITHUB_ACTIONS) {
+        const detail = JSON.stringify(r.body ?? {}).slice(0, 300);
+        console.log(`::warning title=Yahoo!の診断::コード${r.status} 返事:${detail} ／ Client IDの文字数:${env.YAHOO_APP_ID.length}`);
+      }
+      return { status: "error", message: errorMessage("yahoo", r.status, r.body) };
+    }
     for (const it of r.body?.hits || []) {
       if (isMatch(product, it.name, it.price, excludeWords)) {
         const code = it.shipping?.code;
