@@ -80,6 +80,7 @@ async function getJson(url, headers = {}) {
 
 async function searchRakuten(product, excludeWords) {
   const found = [];
+  const seen = []; // 診断用：楽天が返した件数と商品名（条件に合わなかった理由を調べるため）
   for (const q of product.queries) {
     const params = new URLSearchParams({
       applicationId: env.RAKUTEN_APP_ID,
@@ -96,16 +97,20 @@ async function searchRakuten(product, excludeWords) {
     const r = await getJson(`${RAKUTEN_URL}?${params}`, { Referer: siteUrl(), Origin: new URL(siteUrl()).origin });
     await sleep(1200);
     if (!r.ok) {
-      if (r.status === 404) continue;
+      if (r.status === 404) { seen.push(`「${q}」404:${r.body?.error_description || ""}`); continue; }
       return { status: "error", message: errorMessage("rakuten", r.status, r.body) };
     }
-    for (const it of r.body?.items || []) {
+    const items = r.body?.items || [];
+    seen.push(`「${q}」${items.length}件 例:${items.slice(0, 2).map((i) => `${String(i.itemName).slice(0, 40)}(${i.itemPrice})`).join(" / ")}`);
+    for (const it of items) {
       if (isMatch(product, it.itemName, it.itemPrice, excludeWords)) {
         found.push({ price: it.itemPrice, title: it.itemName, url: it.itemUrl, shop: it.shopName, shipping: it.postageFlag === 0 ? "送料込み" : "送料別", image: rakutenImage(it.mediumImageUrls) });
       }
     }
   }
-  return pickCheapest(found, "楽天");
+  const res = pickCheapest(found, "楽天");
+  if (res.status === "not_found" && env.GITHUB_ACTIONS) console.log(`::warning title=楽天の診断 ${product.name}::${seen.join(" ｜ ")}`);
+  return res;
 }
 
 async function searchYahoo(product, excludeWords) {
