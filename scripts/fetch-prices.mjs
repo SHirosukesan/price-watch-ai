@@ -246,7 +246,7 @@ async function notify(title, message, clickUrl) {
 }
 
 export async function main() {
-  const { products, excludeWords } = JSON.parse(await readFile(PRODUCTS_FILE, "utf8"));
+  const { products, excludeWords, dataVersion = 1 } = JSON.parse(await readFile(PRODUCTS_FILE, "utf8"));
   const hasRakuten = !!(env.RAKUTEN_APP_ID && env.RAKUTEN_ACCESS_KEY);
   const hasYahoo = !!env.YAHOO_APP_ID;
   const hasKeepa = !!env.KEEPA_API_KEY;
@@ -257,8 +257,10 @@ export async function main() {
     return;
   }
 
-  const previous = await loadPrevious();
-  const result = { generatedAt: new Date().toISOString(), mode: "live", products: {} };
+  // 検索条件を変えた（dataVersion が違う）ときは、前回の記録を使わない（比較がおかしくなるため）
+  const loaded = await loadPrevious();
+  const previous = (loaded?.dataVersion ?? 1) === dataVersion ? loaded : null;
+  const result = { generatedAt: new Date().toISOString(), mode: "live", dataVersion, products: {} };
 
   for (const p of products) {
     const links = searchLinks(p.queries[0]);
