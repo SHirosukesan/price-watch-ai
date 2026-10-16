@@ -18,7 +18,7 @@
 3. **実価格とサンプル価格を必ず区別**して表示する（`prices.json` の `mode` と各店舗の `status` を使う）。
 4. **スクレイピングをしない**。楽天市場 商品検索API、Yahoo!ショッピング 商品検索API v3、Amazon は既定では無料方式（Keepa の価格推移ページと Amazon へのリンク、値下がりは Keepa の無料メール通知）。有料の Keepa API キーがある場合のみ自動取得。PA-API は廃止、Creators API は売上条件で使えない。手入力方式は利用者が不要と判断したので作らない。
 5. **APIキー・パスワードをコードに書かない**。GitHub Secrets（`RAKUTEN_APP_ID` / `RAKUTEN_ACCESS_KEY` / `YAHOO_APP_ID` / `KEEPA_API_KEY` / `NTFY_TOPIC`）から環境変数で読む。
-6. 無料で運用する（GitHub Pages + Actions、公開リポジトリ）。
+6. 無料で運用する。リポジトリは `SHirosukesan/price-watch-ai`（**非公開**）。無料プランの非公開リポジトリでは GitHub Pages が使えないので、公開先は利用者と相談して決める（未決定）。
 7. AI 価格予測・課金・複雑なポイント計算は入れない。
 
 ## 構成
@@ -48,6 +48,8 @@ python3 -m http.server 8000           # → ブラウザで http://localhost:800
 アプリ内の「設定 → 動作チェック」でも確認できる。変更後はスマホ幅（約400px）と PC 幅の両方で表示を確認すること。
 
 ## 変更時のルール
+
+- 利用者への報告では、実行していない作業・つながっていない機能を「完了」と言わない。
 
 - 1回の変更は小さく。何を変えたかを日本語で利用者に説明する。
 - 新しい商品は `data/products.json` に追加するだけで動くように保つ（第2段階への布石）。
