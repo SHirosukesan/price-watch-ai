@@ -286,6 +286,12 @@ export async function main() {
       const hit = best.price <= p.target ? `（初期目標 ${p.target.toLocaleString()}円 以下！）` : "";
       await notify(`値下がり：${p.name}`, `${storeName}で ${best.price.toLocaleString()}円（前回 ${previousBest.toLocaleString()}円）${hit}`, stores[best.store].url);
     }
+    // GitHub の実行画面に結果のメモを出す（キーは含まない）
+    if (env.GITHUB_ACTIONS) {
+      const fmt = (st) => st.status === "ok" ? `${st.price}円` : (st.message || st.status);
+      const level = [stores.rakuten, stores.yahoo].some((st) => st.status === "error") ? "warning" : "notice";
+      console.log(`::${level} title=${p.name}::楽天=${fmt(stores.rakuten)} / Yahoo!=${fmt(stores.yahoo)}`);
+    }
     console.log(`${p.name}: Amazon=${stores.amazon.price ?? stores.amazon.status} / 楽天=${stores.rakuten.price ?? stores.rakuten.status} / Yahoo!=${stores.yahoo.price ?? stores.yahoo.status}`);
   }
 
