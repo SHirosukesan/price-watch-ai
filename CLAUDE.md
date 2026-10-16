@@ -33,13 +33,16 @@
 
 ## API の要点（2026年10月時点で確認）
 
-- 楽天：`https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701`。`applicationId` と `accessKey` が必須。登録した Web サイト URL と Referer の一致チェックあり（スクリプトは Pages の URL を Referer に付ける）。同一URLへの短時間の大量アクセスは制限される。
-- Yahoo!：`https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch`。`appid` 必須。目安 1秒1回。ブラウザからの直接呼び出しは CORS で失敗する可能性が高いので、取得は Actions 側で行う。
+- 楽天：`https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701`。`applicationId` と `accessKey` が必須。登録した Web サイト URL と Referer の一致チェックあり（スクリプトは Pages の URL を Referer に付ける）。同一URLへの短時間の大量アクセスは制限される。実際の返事は `formatVersion=2` でも見出しが大文字の `Items`（説明書の例は小文字）。両方読めるようにしてある（2026-10-16 確認）。
+- Yahoo!：`https://shopping.yahooapis.jp/ShoppingWebService/V3/itemSearch`。作ったばかりの Client ID は数分間 403「Your Request was Forbidden」になることがある（2026-10-16 に発生、数分後に自然に回復）。`appid` 必須。目安 1秒1回。ブラウザからの直接呼び出しは CORS で失敗する可能性が高いので、取得は Actions 側で行う。
 - Keepa：`https://api.keepa.com`、日本は `domain=5`。初回だけ `/search?type=product`（1ページ10トークン）で ASIN を探し、`prices.json` の `stores.amazon.asins` に保存して再利用。価格は `/product?stats=1&update=1`（1 ASIN あたり約1トークン）の `stats.current[0]`（Amazon販売）と `[1]`（他の出品者・新品）。-1 は在庫なし。価格は円の整数。
 - 商品画像は Yahoo! → 楽天 → Keepa の順で API が返す画像URLを使う（画像ファイルをリポジトリに保存しない）。
 - 出典表示（Rakuten Developers / Yahoo! JAPAN のクレジット）を設定画面から消さない。
 
 ## 動作確認の方法
+
+- Actions の実行画面に、商品ごとの取得結果メモ（価格・商品名・ショップ名、キーは含まない）が出る。失敗時は「楽天の診断」「Yahoo!の診断」メモが出る。Claude からは GitHub API の check-runs annotations で読める。
+
 
 ```bash
 node scripts/fetch-prices.mjs        # キー無しならサンプル価格を data/prices.json に書く
